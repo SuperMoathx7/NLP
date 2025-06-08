@@ -2,12 +2,12 @@ var cur_lang = "en"
 
 let lang_model = {
     title: {
-        en: "Phone Recommender & ChatBot",
-        ar: "مُرشِح الهواتف وروبوت الدردشة"
+        en: "Phone Recommender ChatBot",
+        ar: "الروبوت مرشِّح الهواتف"
     },
     subTitle: {
-        en: "Ask for phone recommendations (e.g., 'show me phones with 8GB RAM') or have a general chat.",
-        ar: "اطلب توصيات للهواتف (مثلاً: 'أرني هواتف بذاكرة 8 جيجابايت') أو قم بمحادثة عامة"
+        en: "Ask for phone recommendations",
+        ar: "اطلب توصيات للهواتف"
     },
     userInput: {
         en: "Enter your question",
@@ -17,6 +17,7 @@ let lang_model = {
         en: "Ask!",
         ar: "اسأل!"
     }
+
 }
 
 
@@ -24,6 +25,7 @@ function switchLanguage(new_lang) {
     cur_lang = new_lang
     switchButtons()
     switchMainScreen()
+      updateResponseReadyMessage(); 
 }
 
 function switchButtons() {

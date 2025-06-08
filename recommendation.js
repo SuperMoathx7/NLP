@@ -152,32 +152,50 @@ function getFinalPhones(phones) {
     final_phones.sort((a, b) => a["points"] == b["points"] ? b["phone"]["Price_USD"] - a["phone"]["Price_USD"] : b["points"] - a["points"])
     return final_phones.map(p => p["phone"])
 }
-
 function getResultMessage(criteria, maxPoint) {
+    const isArabic = cur_lang === "ar";
+
     if (maxPoint == null) {
-        return "No phones satisfy these conditions, please try again"
+        return isArabic
+            ? "لا توجد هواتف تطابق هذه الشروط، حاول مرة أخرى"
+            : "No phones satisfy these conditions, please try again";
     }
-    var not_null = 0
-    for (var i = 0; i < properties.length; ++i) {
-        not_null += criteria[properties[i]] != "null"
+
+    let not_null = 0;
+    for (let i = 0; i < properties.length; ++i) {
+        if (criteria[properties[i]] !== "null") {
+            not_null += 1;
+        }
     }
+
     if (maxPoint > not_null - 0.75) {
-        return "Here are some phones that match your request:"
+        return isArabic
+            ? "إليك بعض الهواتف التي تطابق طلبك:"
+            : "Here are some phones that match your request:";
     } else if (maxPoint > not_null - 0.5) {
-        return "Here are some phones that are close to your request:"
+        return isArabic
+            ? "إليك بعض الهواتف القريبة من طلبك:"
+            : "Here are some phones that are close to your request:";
     } else if (maxPoint > not_null - 1) {
-        return "Here are some phones that match some of your request:"
+        return isArabic
+            ? "إليك بعض الهواتف التي تطابق جزءاً من طلبك:"
+            : "Here are some phones that match some of your request:";
     } else {
-        return "No phones match your request, here are the closest ones:"
+        return isArabic
+            ? "لا توجد هواتف تطابق طلبك تماماً، إليك الأقرب:"
+            : "No phones match your request, here are the closest ones:";
     }
 }
+
 
 async function getResponse(input) {
     const responseDiv = document.getElementById('response');
     try {
         // IMPORTANT: This API key is visible in the frontend code.
         // For a real application, this should be handled via a secure backend.
-        const apiKey = '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';
+        //const apiKey = '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';
+        //const apiKey = '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';
+        const apiKey = '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';
         const response = await fetch(
             'https://openrouter.ai/api/v1/chat/completions', {
                 method: 'POST',
