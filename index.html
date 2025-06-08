@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WSP ChatBot</title>
+    <!-- Bootstrap CSS for styling -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!-- Marked.js for rendering Markdown from the AI -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- PapaParse for reading the CSV file in the browser -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="en-text">
+    <div class="container d-flex align-items-center justify-content-center mt-3" style="direction: ltr;">
+        <button id="en-btn" class="btn btn-primary mr-2 active" onclick="switchLanguage('en')">English</button>
+        <button id="ar-btn" class="btn btn-primary" onclick="switchLanguage('ar')">Arabic</button>
+    </div>
+    <div class="container container-chat">
+        <h2 id="title">Phone Recommender & ChatBot</h2>
+        <p id="subTitle">Ask for phone recommendations (e.g., "show me phones with 8GB RAM") or have a general chat.</p>
+        <div class="form-group">
+            <input
+                type="text"
+                class="form-control"
+                id="userInput"
+                placeholder="Enter your question"
+                onkeyup="if(event.keyCode === 13) sendMessage()"
+            />
+        </div>
+        <button id="askButton" class="btn btn-success btn-block" onclick="sendMessage()">Ask!</button>
+        <div id="response">Your answer will appear here...</div>
+    </div>
+
+    <script src="recommendation.js"></script>
+    <script src="language.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

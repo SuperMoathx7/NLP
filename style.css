@@ -1,0 +1,44 @@
+body {
+    background-color: #f4f7f6;
+}
+.container-chat {
+    max-width: 750px;
+    margin-top: 15px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+#response {
+    margin-top: 20px;
+    padding: 20px;
+    /* min-height: 100px; */
+    background-color: #e9ecef;
+    border-radius: 5px;
+    /* white-space: pre-wrap; */
+}
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.phone-card {
+    border-radius: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.phone-card:hover {
+    transform: translateY(-3px);
+}
+.hover-shadow:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+.ar-text {
+    text-align: right;
+}
+.en-text {
+    text-align: left;
+}
