@@ -1,4 +1,8 @@
-const apiKey = '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'
+//const apiKey = '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'
+//const apiKey = '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';
+//const apiKey = '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';
+const apiKey = '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'
+
 
 
 // Global variable to hold the parsed mobile phone data
@@ -164,7 +168,33 @@ async function displayPhoneReviewsFromCSV(phoneName, requestedFeature) {
                     <small class="text-muted">Model: ${review.Model} (Company: ${review.Company || 'N/A'})</small>
                 </div>`;
         });
-        responseDiv.innerHTML = htmlResponse;
+        if(cur_lang=="ar"){//send the result to the model to translate it then return it back and show it up to the display....
+            let prompt = `Act like an expert HTML content translator with deep knowledge of preserving web structure integrity.
+
+Objective: You will receive an HTML document that contains various tags and elements. Your task is to translate only the text inside the <p> and <h5> tags into Arabic, while keeping the rest of the HTML code unchanged. Do not modify any other tags, attributes, or structural parts of the HTML. The output must be a clean, complete HTML string that mirrors the input structure exactly—except for the translated contents of the specified tags.
+
+Follow these steps meticulously:
+
+Step 1: Identify and extract the contents of all <p> and <h5> tags in the HTML string.
+
+Step 2: Translate only the textual content found inside these tags into the target language, without affecting any HTML tags, inline styles, classes, or attributes.
+
+Step 3: Replace the original text within each <p> and <h5> tag with the translated version while preserving the rest of the document exactly as it is.
+
+Step 4: Return the full HTML document with the updated translations, ensuring that it remains valid and correctly formatted.
+
+Step 5: Do not add any commentary or explanation—just return the updated HTML string.
+
+Here is the HTML content for translation:
+${htmlResponse}
+
+Take a deep breath and work on this problem step-by-step.
+`;
+            responseDiv.innerHTML = await getResponse(prompt);
+        }
+        else{
+            responseDiv.innerHTML = htmlResponse;
+            console.log(htmlResponse);}
     } else {
         responseDiv.innerHTML = lang_model.noReviewsFound[cur_lang].replace("{phoneName}", phoneName);
     }
@@ -186,7 +216,18 @@ async function sendMessage() {
 
     let translatedQuery = input;
     if (cur_lang === "ar") {
-        const propmtt = `Act like a professional multilingual translator... (your existing translation prompt) ... Here is the input text:\n${input}\nTake a deep breath and work on this problem step-by-step.`;
+        const propmtt = `Act like a professional multilingual translator with expertise in semantic accuracy and linguistic nuance. Your task is to accurately translate non-English queries into English, ensuring natural phrasing and clear context. You will be provided with a block of foreign language text, clearly delimited. Do not include any commentary or formatting. Only return the fully translated English version of the input text.
+
+Step-by-step:
+
+Step 1: Identify the language of the input text.
+Step 2: Translate the entire input text into grammatically correct and contextually accurate English.
+Step 3: Remove any non-essential artifacts (e.g., brackets, placeholder notes) unless they are part of the original message's meaning.
+Step 4: Return only the translated English text with no preamble or response structure.
+
+Here is the input text:
+${input}\n
+Take a deep breath and work on this problem step-by-step.`;
         translatedQuery = await getResponse(propmtt);
         console.log(`Query translated: from "${input}" to "${translatedQuery}"`);
     }
@@ -208,7 +249,22 @@ async function sendMessage() {
         }
         else {
             responseDiv.innerHTML = lang_model.thinking[cur_lang];
-            let generalPrompt = `Act like a concise assistant named "PhoneFinderBot". ... (your existing general prompt) ... here is the text ${input}`;
+            let generalPrompt = `Act like a concise assistant named "PhoneFinderBot". You help users pick a phone using only these specs: price, RAM, screen size, CPU type, battery size, camera MP, and weight.
+
+You do not answer general phone questions. Only reply briefly, and always remind users you can help based on these specs only.
+
+Follow these steps:
+Step 1: Detect if the user writes in Arabic or English. Respond in the same language.
+Step 2: If the question is off-topic, reply briefly and remind them of your spec-based help.
+Step 3: If specs are mentioned, acknowledge and ask for more info if needed to assist.
+
+Example replies:
+EN: “I help with phone specs only (price, RAM, CPU, etc.). Please share your preferences.”
+AR: "أساعدك حسب المواصفات فقط (السعر، الرام، المعالج...). من فضلك أرسل تفضيلاتك."
+
+Take a deep breath and work on this problem step-by-step.
+
+here is the text ${input}`;
             await getGeneralResponse(generalPrompt);
         }
     }
