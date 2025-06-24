@@ -207,11 +207,7 @@ function getResultMessage(criteria, maxPoint) {
 async function getResponse(input) {
     const responseDiv = document.getElementById('readyMessage');
     try {
-        // IMPORTANT: This API key is visible in the frontend code.
-        // For a real application, this should be handled via a secure backend.
-        //const apiKey = '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';
-        // const apiKey = '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';
-        // const apiKey = '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';
+
         const response = await fetch(
             'https://openrouter.ai/api/v1/chat/completions', {
                 method: 'POST',
