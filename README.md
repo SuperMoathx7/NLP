@@ -46,7 +46,9 @@ An interactive web-based chatbot that gives personalized phone recommendations a
 
 Here’s how the system handles a user query:
 
-![Query Flow Diagram](./Query.png)
+<p align="center">
+  <img src="./Query.png" alt="Query Flow Diagram" width="500"/>
+</p>
 
 1. **Query Classification:**  
    The system first classifies input as:  
