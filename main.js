@@ -1,10 +1,5 @@
-//const apiKey = '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'
-//const apiKey = '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';
-// const apiKey = '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';
 const apiKey = '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';
-// const apiKey = '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';
-// const apiKey = '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';
-// const apiKey = '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';
+
 
 // Global variable to hold the parsed mobile phone data
 let mobileData = [];
