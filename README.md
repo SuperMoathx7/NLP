@@ -1,71 +1,121 @@
-# Phone Recommender Chatbot
+# 📱 Phone Recommender ChatBot
 
-This is a web-based chatbot designed to help users find the perfect mobile phone based on their needs. Users can describe what they are looking for, and the chatbot will provide recommendations from its database. It can also provide summarized reviews for specific phone models.
+An interactive web-based chatbot that gives personalized phone recommendations and review summaries based on user input. Supports English and Arabic. Built using HTML, CSS, JS, Bootstrap, and CSV datasets—no backend needed.
 
-## Features
+---
 
-* **Conversational Recommendations**: Simply tell the chatbot what you're looking for in a phone (e.g., "a phone with a great camera and long battery life") and it will provide you with a list of suitable options.
-* **Phone Reviews**: Ask for reviews of a specific phone model, and the chatbot will give you a summary of what other users think.
-* **Multi-language Support**: The interface and the chatbot's responses can be switched between English and Arabic.
-* **Chat History**: Your conversations are saved locally, so you can review them at any time.
-* **Responsive Design**: The user interface is designed to work well on both desktop and mobile devices.
+## 🔥 Features
 
-## Technologies Used
+- 📊 Recommends phones based on user-defined specs (RAM, battery, screen, etc.)
+- 💬 Displays user reviews from a CSV dataset
+- 🌐 Supports English + Arabic (RTL compatible)
+- 💾 Local chat saving & loading (via browser localStorage)
+- 🧠 Smart prompt logic for parsing input and guiding conversation
+- 📈 Responsive UI with smooth UX
 
-* **Frontend**: HTML, CSS, JavaScript
-* **UI Framework**: Bootstrap
-* **Icons**: Font Awesome
-* **CSV Parsing**: PapaParse
-* **Markdown Rendering**: Marked.js
+---
 
-## Project Structure
+## 🧠 Tech Stack
 
-The project is structured into several files, each with a specific purpose:
+- Vanilla JavaScript (modular)
+- Bootstrap 4.3
+- Font Awesome
+- PapaParse (CSV parsing)
+- Marked.js (Markdown support)
+- OpenRouter API (GPT model backend)
 
-| File                | Description                                                                                               |
-| ------------------- | --------------------------------------------------------------------------------------------------------- |
-| `index.html`        | The main HTML file that defines the structure of the chatbot's user interface.                            |
-| `style.css`         | Contains all the CSS rules for styling the application.                                                   |
-| `main.js`           | The core JavaScript file that handles user input and communication with the AI model.                     |
-| `chat.js`           | Manages the chat functionality, including saving and loading conversations.                               |
-| `recommendation.js` | Contains the logic for generating phone recommendations based on user queries.                            |
-| `review.js`         | Handles the logic for fetching and displaying phone reviews.                                              |
-| `language.js`       | Manages the multi-language support for the application.                                                   |
-| `ui.js`             | Includes JavaScript for enhancing the user interface with animations and other dynamic effects.           |
-| `mobiles.csv`       | A CSV file containing the database of mobile phones and their specifications.                             |
-| `reviews.csv`       | A CSV file with user reviews for different phone models.                                                  |
+---
 
-## How to Use
+## 📂 File Structure
 
-1.  **Clone the repository**:
-    ```bash
-    git clone [https://github.com/your-username/phone-recommender-chatbot.git](https://github.com/your-username/phone-recommender-chatbot.git)
-    ```
-2.  **Add your API Key**:
-    * Open the `main.js` file.
-    * Find the line with `const apiKey = '...';`.
-    * Replace the placeholder key with your own API key from your chosen AI provider.
-3.  **Run the application**:
-    * Open the `index.html` file in your web browser.
+```plaintext
+📁 project-root/
+├── index.html            # Main UI layout
+├── style.css             # Custom styles
+├── main.js               # App entry + data loading
+├── chat.js               # Chat history + localStorage logic
+├── language.js           # Bilingual UI + dynamic translation
+├── recommendation.js     # Core logic for phone suggestions
+├── review.js             # Review parsing + summarization
+├── mobiles.csv           # Phone data
+├── reviews.csv           # User review data
+```
 
-## Future Improvements
+---
 
-Here are some ideas for future enhancements to this project:
+## 🚀 Getting Started
 
-* **Add more languages**: Extend the multi-language support to include more languages.
-* **Expand the database**: Add more phone models to the `mobiles.csv` file.
-* **Live Review API**: Integrate with a live reviews API to provide more up-to-date feedback.
-* **User Accounts**: Implement user accounts to allow users to save their chat history across different devices.
-* **More sophisticated recommendations**: Improve the recommendation algorithm to consider more factors and provide more personalized suggestions.
+1. **Clone the repo:**
 
-## Contributors
+```bash
+git clone https://github.com/your-username/phone-recommender-chatbot.git
+cd phone-recommender-chatbot
+```
 
-We welcome contributions from the community! If you'd like to contribute to this project, please follow these steps:
+2. **Run locally:**
 
-1.  Fork the repository.
-2.  Create a new branch for your feature or bug fix.
-3.  Make your changes and commit them with clear, descriptive messages.
-4.  Push your changes to your fork.
-5.  Create a pull request to the main repository's `main` branch.
+Open `index.html` directly in your browser.
 
-We appreciate your help in making this project even better!
+> ⚠️ Some browsers (like Chrome) block local CSV access unless served over HTTP. Use a local server:
+```bash
+npx serve .
+# or
+python3 -m http.server
+```
+
+3. **Set your API key:**
+
+Replace the `apiKey` in `main.js`:
+
+```js
+const apiKey = 'sk-or-...'; // Replace with your OpenRouter API key
+```
+
+> Never expose your real keys in public. For production, move API access to a backend.
+
+---
+
+## 🌍 Language Support
+
+Switch between English and Arabic using the buttons at the top of the UI. The layout adjusts automatically (RTL for Arabic).
+
+---
+
+## 🧪 Example Prompts
+
+- “I need a phone with 8GB RAM and a great camera.”
+- “ما أفضل هاتف ببطارية قوية؟”
+- “Review for iPhone 15 Pro”
+- “How’s the camera on Galaxy S24?”
+
+---
+
+## 💬 Chat Management
+
+- 💾 Save chats to localStorage
+- 📂 Load and continue past conversations
+- 🗑️ Delete saved chats
+
+---
+
+## 🛠️ Developer Notes
+
+- All logic is handled client-side (no backend required)
+- Modular JS structure
+- Dynamic feature extraction and review summarization using GPT
+- CSV parsing done with PapaParse
+
+---
+
+## 👥 Contributors
+
+- **Your Name** – Full-stack Dev / Project Creator  
+- **ChatGPT** – Prompting, architecture suggestions, review logic (LLM assistant)  
+
+Want to contribute? Open an issue or PR.
+
+---
+
+## 📜 License
+
+MIT – free to use, modify, or distribute. Just don't expose your real keys or misuse third-party APIs.
