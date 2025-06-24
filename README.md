@@ -1,6 +1,6 @@
 # 📱 Phone Recommender ChatBot
 
-An interactive web-based chatbot that gives personalized phone recommendations and review summaries based on user input. Supports English and Arabic. Built using HTML, CSS, JS, Bootstrap, and CSV datasets—no backend needed.
+An interactive web-based chatbot that gives personalized phone recommendations and review summaries based on user input. Supports English and Arabic. Built using HTML, CSS, JS, Bootstrap, and CSV datasets.
 
 ---
 
@@ -10,19 +10,19 @@ An interactive web-based chatbot that gives personalized phone recommendations a
 - 💬 Displays user reviews from a CSV dataset
 - 🌐 Supports English + Arabic (RTL compatible)
 - 💾 Local chat saving & loading (via browser localStorage)
-- 🧠 Smart prompt logic for parsing input and guiding conversation
+- 🧠 Smart prompt logic for parsing input and guiding conversation (powered by DeepSeek LLM or any compatible model)
 - 📈 Responsive UI with smooth UX
 
 ---
 
-## 🧠 Tech Stack
+## 🧠Technologies Used
 
-- Vanilla JavaScript (modular)
-- Bootstrap 4.3
-- Font Awesome
-- PapaParse (CSV parsing)
-- Marked.js (Markdown support)
-- OpenRouter API (GPT model backend)
+- **Frontend**: HTML, CSS, JavaScript
+- **UI Framework**: Bootstrap
+- **Icons**: Font Awesome
+- **CSV Parsing**: PapaParse
+* **Markdown Rendering**: Marked.js
+- **OpenRouter API** (DeepSeek LLM or other GPT-compatible model)
 
 ---
 
@@ -40,6 +40,33 @@ An interactive web-based chatbot that gives personalized phone recommendations a
 ├── mobiles.csv           # Phone data
 ├── reviews.csv           # User review data
 ```
+---
+
+### 🧭 Query Flow Overview
+
+Here’s how the system handles a user query:
+
+![Query Flow Diagram](./Query.png)
+
+1. **Query Classification:**  
+   The system first classifies input as:  
+   - General question  
+   - Phone spec-related  
+   - Phone review-related
+
+2. **Prompting the LLM:**  
+   - General queries use a lightweight assistant-style prompt.  
+   - Spec/review queries trigger structured prompts to extract exact device specs or target features.
+
+3. **Local Dataset Match:**  
+   Extracted info is matched against:
+   - `Phone Specs Dataset` for recommendations
+   - `Phone Review Dataset` for review summaries
+
+4. **Response Generation:**  
+   - The result is then formatted and returned to the user with minimal latency.
+
+This flow keeps things fast, localized, and easy to swap LLM providers.
 
 ---
 
@@ -70,9 +97,7 @@ Replace the `apiKey` in `main.js`:
 ```js
 const apiKey = 'sk-or-...'; // Replace with your OpenRouter API key
 ```
-
-> Never expose your real keys in public. For production, move API access to a backend.
-
+* You can get a free API key from the OpenRouter Website.
 ---
 
 ## 🌍 Language Support
@@ -98,24 +123,32 @@ Switch between English and Arabic using the buttons at the top of the UI. The la
 
 ---
 
-## 🛠️ Developer Notes
+## 🛠️ Notes
 
 - All logic is handled client-side (no backend required)
 - Modular JS structure
-- Dynamic feature extraction and review summarization using GPT
+- Dynamic feature extraction and review summarization using LLM
 - CSV parsing done with PapaParse
+- Easily switch to another LLM by replacing the API key and endpoint
 
 ---
 
-## 👥 Contributors
+## 🧠 LLM & Data Architecture
 
-- **Your Name** – Full-stack Dev / Project Creator  
-- **ChatGPT** – Prompting, architecture suggestions, review logic (LLM assistant)  
+📦 **Local Dataset:**  
+All recommendations and reviews come from structured local files — `mobiles.csv` and `reviews.csv`. No third-party data is fetched.
 
-Want to contribute? Open an issue or PR.
+🧠 **Natural Language Understanding:**  
+Queries are interpreted using **DeepSeek** LLM via the OpenRouter API. The model helps parse and respond in natural language, but **never supplies external data**.
+
+🔧 **Plug & Play with Any Model:**  
+You can replace DeepSeek with **any OpenAI-compatible LLM** by swapping the API key and endpoint in `main.js`. The architecture is model-agnostic.
 
 ---
 
-## 📜 License
+## 👥 The Team
 
-MIT – free to use, modify, or distribute. Just don't expose your real keys or misuse third-party APIs.
+- **Moath AbdAlbaqi** , **Suhaib Sawalha**, **Khaled Rimawi**, **Deya Hajaj**.
+
+
+
