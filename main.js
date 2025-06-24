@@ -1,4 +1,4 @@
-const apiKey = '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';
+const apiKey = '';
 
 
 // Global variable to hold the parsed mobile phone data
